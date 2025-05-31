@@ -1,4 +1,4 @@
--- Zajedničke funkcije i tipovi za evaluaciju Lambda kalkulusa
+
 
 module Common (
   Token (..),
@@ -20,7 +20,7 @@ import Data.HashMap.Strict as M
 data Token = OtvZagrada | ZatvZagrada | Rec String | LambdaZnak | Tacka | Definicija | Kraj
   deriving (Read, Show, Eq)
 
--- Definicija izraza lambda kalkulusa
+-- Definicija izraza 
 data Expr = Varijabla String
           | Apstrakcija Expr Expr
           | Aplikacija Expr Expr
@@ -87,6 +87,6 @@ ispis (Left err) = greska err
 greska :: String -> String
 greska msg = "GREŠKA: " ++ msg
 
--- Pomoćna funkcija za umetanje u okruženje (ako trebaš)
+-- Pomoćna funkcija za umetanje u okruženje 
 umetni :: String -> Expr -> Okruzenje -> Okruzenje
 umetni = M.insert
