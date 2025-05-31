@@ -1,4 +1,3 @@
--- Interpreter za Lambda račun, napisan u Haskellu
 import System.Console.Haskeline
 import System.IO
 import Control.Monad
