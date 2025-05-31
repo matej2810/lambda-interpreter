@@ -1,5 +1,5 @@
 # lambda-interpreter
-##Završni projekt iz kolegija Semantika programskih jezika 24./25.
+## Završni projekt iz kolegija Semantika programskih jezika 24./25.
 
 
 ## Kako radi
