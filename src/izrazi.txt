@@ -1,0 +1,53 @@
+-- Osnovni kombinatori
+
+I := \x. x
+Y := \f. (\x. f (x x)) (\x. f (x x))
+
+-- Booleovi izrazi (logičke vrijednosti)
+
+true  := \a. \b. a
+false := \a. \b. b
+
+not := \b. b false true
+and := \b1. \b2. b1 b2 false
+or  := \b1. \b2. b1 true b2
+
+-- Liste i parovi
+
+cons := \a. \b. \f. f a b
+car  := \p. p (\a. \b. a)
+cdr  := \p. p (\a. \b. b)
+nil  := \x. true
+null? := \l. l (\a. \b. false)
+
+-- Funkcija map za liste, implementirana rekurzijom preko Y kombinatora
+
+map := Y (\map. \f. \l. (null? l) nil (cons (f (car l)) (map f (cdr l))))
+
+-- Aritmetika i brojevi u Churchovom obliku
+
+-- Operacije nad brojevima
+
+succ := \n. \f. \x. f (n f x)
+pred := \n. \f. \x. n (\g. \h. h (g f)) (\u. x) I
++    := \n. \m. (n succ) m
+-    := \n. \m. (m pred) n
+*    := \n. \m. n (+ m) 0
+^    := \n. \m. m (* n) 1
+
+-- Usporedbe brojeva
+
+isZero := \n. n (\x. false) true
+<=     := \n. \m. isZero (- n m)
+>=     := \n. \m. isZero (- m n)
+==     := \n. \m. and (>= n m) (<= n m)
+<      := \n. \m. not (>= n m)
+>      := \n. \m. not (<= n m)
+
+
+I := \x. x
+Y := \f. (\x. f (x x)) (\x. f (x x))
+
+-- Faktorska funkcija definirana pomoću Y kombinatora i prethodno definiranih funkcija
+
+factorial := Y (\f. \n. (isZero n) 1 (* n (f (pred n))))
